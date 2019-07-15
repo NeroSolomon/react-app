@@ -1,14 +1,17 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Home from './containers/Home.js'
-import Test from './containers/Test.js'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import routes from './config/routes.js'
+import configStore from './store/store-config.js'
+
+const store = configStore()
+console.log(store.getState())
 
 function App() {
   return (
-    <Router>
-      <Route exact path="/" component={Home} />
-      <Route path="/test" component={Test} />
-    </Router>
+    <Provider store={store}>
+      <Router>{routes}</Router>
+    </Provider>
   )
 }
 

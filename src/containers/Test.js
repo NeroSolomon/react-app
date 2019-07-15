@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-function Test() {
-  return <div>123</div>
+class Test extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      msg: 'test'
+    }
+  }
+
+  render() {
+    const { user } = this.props
+    return <div>{user.name}</div>
+  }
 }
 
-export default Test
+function mapStateToProps(state) {
+  return { user: state.user }
+}
+
+export default connect(mapStateToProps)(Test)
