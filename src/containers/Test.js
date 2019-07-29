@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button } from 'antd'
 
 class Test extends Component {
   constructor(props) {
@@ -9,9 +10,20 @@ class Test extends Component {
     }
   }
 
+  fetchData() {
+    this.props.dispatch({
+      type: 'CHANG_NAME',
+      name: 'Vuex'
+    })
+  }
+
   render() {
     const { user } = this.props
-    return <div>{user.name}</div>
+    return (
+      <div>
+        <Button onClick={this.fetchData.bind(this)}>{user.name}</Button>
+      </div>
+    )
   }
 }
 

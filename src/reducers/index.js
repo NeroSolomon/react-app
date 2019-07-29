@@ -16,7 +16,7 @@ const user = function(state = { name: 'redux' }, action) {
 
 const project = function(state = { name: 'react' }, action) {
   switch (action.type) {
-    case 'CHANGE_NAME':
+    case 'CHANGE_CLI':
       return {
         ...state,
         name: action.name
