@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import routes from './config/routes.js'
+import configStore from './store/store-config.js'
+import {
+  addLocaleData,
+  IntlProvider,
+  FormattedMessage
+} from 'react-intl' /* react-intl imports */
+import en from 'react-intl/locale-data/en'
+import zh from 'react-intl/locale-data/zh'
+import en_US from './locales/en.js'
+import zh_CN from './locales/cn.js'
+import { Button } from 'antd'
+addLocaleData([...en, ...zh])
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+const store = configStore()
+console.log(store.getState())
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      lang: 'en'
+    }
+  }
+
+  render() {
+    let messages = {}
+    messages['en'] = en_US
+    messages['zh'] = zh_CN
+    return (
+      <Provider store={store}>
+        <IntlProvider
+          locale={this.state.lang}
+          messages={messages[this.state.lang]}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          <div>
+            <FormattedMessage id="hello" />
+            <Button onClick={() => this.setState({ lang: 'zh' })}>
+              change lang
+            </Button>
+            <Router>{routes}</Router>
+          </div>
+        </IntlProvider>
+      </Provider>
+    )
+  }
 }
 
-export default App;
+export default App
