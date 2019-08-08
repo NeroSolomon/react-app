@@ -3,6 +3,9 @@
 ## 前期准备
 [Website](https://facebook.github.io/create-react-app/docs/getting-started)
 
+## 官方文档阅读笔记
+[笔记](./notes/官网文档阅读笔记.md)
+
 ## 目录规范
 |- public             静态资源
 |- src                开发目录
@@ -21,7 +24,8 @@ npm run eject         暴露项目配置，用于自定义
 
 ## 项目规范
 [在项目中使用eslint检查](https://facebook.github.io/create-react-app/docs/setting-up-your-editor#displaying-lint-output-in-the-editor)<br>
-[使用prettierrc规范](https://prettier.io/docs/en/configuration.html)
+[使用prettierrc规范](https://prettier.io/docs/en/configuration.html)<br>
+[Eslint禁用检查](https://www.jianshu.com/p/e14937282626)
 
 ## 路由设置
 [路由笔记](./notes/react的路由设置.md)
@@ -32,7 +36,7 @@ npm run eject         暴露项目配置，用于自定义
 ## 国际化
 [在项目中配置多语言](./notes/配置多语言.md)
 
-## 暴露配置
+## 暴露配置之后的笔记
 运行以下命令将脚手架隐藏的设置(webpack，Babel...)暴露出来
 ```
 npm run eject
