@@ -117,3 +117,102 @@ this.props.dispatch({
 
 ## 组织Reducer
 [文档](https://www.redux.org.cn/docs/recipes/StructuringReducers.html)
+
+## 在实际项目中使用redux梳理
+1.首先需要一个initial-state.js管理所有state的初始状态
+```
+// initial-state
+export default {
+  userInfo: {
+    isFetching: false,
+    error: null
+  }
+}
+```
+
+2.创建一个文件管理所有action
+```
+// action-type.js
+export const USER_INFO_REQUEST = 'USER_INFO_REQUEST';
+export const USER_INFO_SUCCESS = 'USER_INFO_SUCCESS';
+export const USER_INFO_FAILURE = 'USER_INFO_FAILURE';
+```
+
+3.创建一个reducer处理单个store
+```
+//user-info.js
+
+import {
+  USER_INFO_REQUEST,
+  USER_INFO_SUCCESS,
+  USER_INFO_FAILURE
+} from './../constants/action-type.js';
+import initialState from './initial-state.js';
+
+// 传入store的初始值
+// 注意function的名字就是store的名字
+export default function userInfo(state = initialState.userInfo, action) {
+  const { code, data } = action;
+  switch (action.type) {
+    case USER_INFO_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+    case USER_INFO_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        error: null,
+        ...data
+      });
+    case USER_INFO_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        error: 200 == code ? null : code
+      });
+    default:
+      return state;
+  }
+}
+```
+
+4.将所有reducer合成一个root reducer
+```
+// index.js
+import { combineReducers } from 'redux';
+// 顺便将路由的reducer也传入
+import { routerReducer } from 'react-router-redux';
+import userInfo from './user-info.js';
+
+const rootReducer = combineReducers({
+  routing,
+  userInfo
+});
+
+export default rootReducer;
+```
+
+5.创建store-config文件暴露store配置
+```
+import { createStore } from 'redux';
+
+let configStore = initialState => {
+  return createStore(
+    rootReducer,
+    initialState
+  );
+};
+
+export default configStore;
+```
+
+6.在最外层组件注入store
+```
+import { Provider } from 'react-redux';
+import configStore from './store/store-config.js';
+
+const store = configStore();
+
+...
+<Provider store={store}></Provider>
+...
+```
