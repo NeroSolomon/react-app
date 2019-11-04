@@ -22,6 +22,9 @@ npm run test          测试
 npm run eject         暴露项目配置，用于自定义
 ```
 
+## css modules
+create-react-app 中如需做css modules处理的css文件需要命名成xxx.modules.scss
+
 ## 项目规范
 [在项目中使用eslint检查](https://facebook.github.io/create-react-app/docs/setting-up-your-editor#displaying-lint-output-in-the-editor)<br>
 [使用prettierrc规范](https://prettier.io/docs/en/configuration.html)<br>
