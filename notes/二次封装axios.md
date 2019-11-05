@@ -22,7 +22,7 @@ export function configRequest() {
 
 
 export function cfetch(urlKey, options, jsonFormat) {
-  let { method, headers, params, sourceSet } = options || {};
+  let { method, headers, params } = options || {};
 
   method = method || 'GET';
   headers = Object.assign({}, headers, defaultHeaders);
