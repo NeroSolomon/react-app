@@ -216,3 +216,5 @@ const store = configStore();
 <Provider store={store}></Provider>
 ...
 ```
+
+这里，我们将不同action分为不同reducer来处理，我不知道是否redux是底层做了什么逻辑来根据action对应的reducer，看起来只是根据dispatch的action全局匹配reducer，但我认为不可能这么傻瓜式吧，这里还需要研究下
